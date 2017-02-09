@@ -11,6 +11,7 @@ export default app => ({ config, manifest }) => {
         <head>
           <meta charset="UTF-8" />
           <title></title>
+          <link rel="stylesheet" href="${manifest["app.css"]}" />
         </head>
         <body>
           <div id="app">${renderToString(app())}</div>

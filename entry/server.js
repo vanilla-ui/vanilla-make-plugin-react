@@ -30,7 +30,7 @@ export default app => ({ config, manifest }) => {
   <head>
     <meta charset="UTF-8" />
     ${head.title.toString()}
-    <link rel="stylesheet" href="${manifest["app.css"]}" />
+    ${manifest["app.css"] ? `<link rel="stylesheet" href="${manifest["app.css"]}" />` : ""}
   </head>
   <body>
     <div id="app">${content}</div>

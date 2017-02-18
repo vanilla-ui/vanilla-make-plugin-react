@@ -1,8 +1,12 @@
 import Koa from "koa";
 import React from "react";
-import { renderToString } from "react-dom/server";
-import { StaticRouter } from "react-router";
+import { renderToString, renderToStaticMarkup } from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
 import Helmet from "react-helmet";
+
+import HTML from "../components/html";
+
+const DOCTYPE = "<!DOCTYPE html>";
 
 export default app => ({ config, manifest }) => {
   const server = new Koa();
@@ -23,23 +27,11 @@ export default app => ({ config, manifest }) => {
       return;
     }
 
-    ctx.body = `
+    const html = DOCTYPE + renderToStaticMarkup((
+      <HTML manifest={manifest} head={head} content={content} />
+    ));
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    ${head.title.toString()}
-    ${manifest["app.css"] ? `<link rel="stylesheet" href="${manifest["app.css"]}" />` : ""}
-  </head>
-  <body>
-    <div id="app">${content}</div>
-    <script src="${manifest["app.js"]}"></script>
-    <script>main.default();</script>
-  </body>
-</html>
-
-    `.trim();
+    ctx.body = html;
   });
 
   server.listen(config.bind.server.port, config.bind.server.host);

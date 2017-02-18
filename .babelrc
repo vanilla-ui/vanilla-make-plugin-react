@@ -1,5 +1,5 @@
 {
   "presets": [
-    ["vanilla", { "modules": "commonjs" }]
+    ["vanilla/react", { "modules": "commonjs" }]
   ]
 }

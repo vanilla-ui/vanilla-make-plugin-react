@@ -1,7 +1,22 @@
 {
   "name": "vanipack-plugin-react",
   "version": "0.2.0",
+  "description": "React plugin for vanipack.",
+  "keywords": ["vanipack", "react"],
+  "homepage": "https://github.com/vanilla-ui/vanipack-plugin-react",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vanilla-ui/vanipack-plugin-react.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vanilla-ui/vanipack-plugin-react/issues"
+  },
   "license": "MIT",
+  "author": {
+    "name": "XiaoYan Li",
+    "email": "lxy.lixiaoyan@gmail.com",
+    "url": "https://github.com/lixiaoyan"
+  },
   "scripts": {
     "test": "make lint"
   },

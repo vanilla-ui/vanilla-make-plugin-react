@@ -3,6 +3,7 @@ import React from "react";
 import { renderToString, renderToStaticMarkup } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import Helmet from "react-helmet";
+import { AppContainer } from "react-hot-loader";
 
 import HTML from "../components/html";
 
@@ -15,9 +16,11 @@ export default app => ({ config, manifest }) => {
     const router = {};
 
     const content = renderToString((
-      <StaticRouter location={ctx.url} context={router}>
-        {app()}
-      </StaticRouter>
+      <AppContainer>
+        <StaticRouter location={ctx.url} context={router}>
+          {app()}
+        </StaticRouter>
+      </AppContainer>
     ));
 
     const head = Helmet.rewind();

@@ -25,7 +25,8 @@
   },
   "pre-commit": "test",
   "dependencies": {
-    "babel-preset-vanilla": "^5.0.0"
+    "babel-preset-vanilla": "^5.0.0",
+    "react-hot-loader": "next"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",

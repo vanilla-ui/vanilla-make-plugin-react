@@ -9,13 +9,16 @@ import HTML from "../components/html";
 
 const DOCTYPE = "<!DOCTYPE html>";
 
+const defaultRender = vdom => ({ html: renderToString(vdom) });
+const defaultInject = html => html;
+
 export default app => ({ config, manifest }) => {
   const server = new Koa();
 
-  server.use((ctx) => {
+  server.use(async (ctx) => {
     const router = {};
 
-    const content = renderToString((
+    const content = await (app.render || defaultRender)((
       <AppContainer>
         <StaticRouter location={ctx.url} context={router}>
           {app()}
@@ -31,10 +34,10 @@ export default app => ({ config, manifest }) => {
     }
 
     const html = DOCTYPE + renderToStaticMarkup((
-      <HTML manifest={manifest} head={head} content={content} />
+      <HTML manifest={manifest} head={head} content={content.html} />
     ));
 
-    ctx.body = html;
+    ctx.body = (app.inject || defaultInject)(html, content);
   });
 
   server.listen(config.bind.server.port, config.bind.server.host);

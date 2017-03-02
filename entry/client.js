@@ -5,10 +5,14 @@ import { render } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { AppContainer } from "react-hot-loader";
 
+const defaultRender = (vdom, root) => {
+  render(vdom, root);
+};
+
 export default (app, hot) => () => {
   const root = document.querySelector("#root");
   const renderContent = () => {
-    render((
+    (app.render || defaultRender)((
       <AppContainer>
         <BrowserRouter>
           {app()}

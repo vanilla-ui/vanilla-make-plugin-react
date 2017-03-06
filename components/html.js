@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from "react";
 
-const development = process.env.NODE_ENV === "development";
+const development = Boolean(process.env.NODE_ENV === "development");
 
 class HTML extends Component {
   static propTypes = {

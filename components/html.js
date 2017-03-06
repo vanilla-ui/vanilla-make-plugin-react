@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from "react";
 
+const development = process.env.NODE_ENV === "development";
+
 class HTML extends Component {
   static propTypes = {
     manifest: PropTypes.object.isRequired,
@@ -10,6 +12,11 @@ class HTML extends Component {
   render() {
     const { manifest, head, content } = this.props;
     const attrs = head.htmlAttributes.toComponent();
+
+    const scripts = [
+      <script key="app" src={manifest["app.js"]} />,
+      <script key="app-execute">{"app.default();"}</script>,
+    ];
 
     return (
       // eslint-disable-next-line jsx-a11y/html-has-lang
@@ -24,14 +31,15 @@ class HTML extends Component {
           {manifest["app.css"] && (
             <link rel="stylesheet" href={manifest["app.css"]} />
           )}
+
+          {development && scripts}
         </head>
         <body>
           {/* eslint-disable react/no-danger */}
           <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
           {/* eslint-enable react/no-danger */}
 
-          <script src={manifest["app.js"]} />
-          <script>{"app.default();"}</script>
+          {!development && scripts}
         </body>
       </html>
     );

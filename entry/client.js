@@ -21,7 +21,11 @@ export default (app, hot) => () => {
     ), root);
   };
 
-  renderContent();
+  if (process.env.NODE_ENV === "development") {
+    document.addEventListener("DOMContentLoaded", renderContent);
+  } else {
+    renderContent();
+  }
 
   hot.accept(renderContent);
 };

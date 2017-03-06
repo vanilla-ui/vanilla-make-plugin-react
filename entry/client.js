@@ -10,8 +10,8 @@ const defaultRender = (vdom, root) => {
 };
 
 export default (app, hot) => () => {
-  const root = document.querySelector("#root");
   const renderContent = () => {
+    const root = document.querySelector("#root");
     (app.render || defaultRender)((
       <AppContainer>
         <BrowserRouter>

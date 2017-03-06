@@ -31,7 +31,7 @@ class HTML extends Component {
           {/* eslint-enable react/no-danger */}
 
           <script src={manifest["app.js"]} />
-          <script>{"main.default();"}</script>
+          <script>{"app.default();"}</script>
         </body>
       </html>
     );
